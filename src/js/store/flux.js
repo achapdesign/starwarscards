@@ -14,48 +14,57 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				
 			]
-			//people = []
-			//planets = []
-			//starships = []
+			People: []
+			Planets: []
+			Starships: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-			loadSomeData: () => {
-				fetch('https://www.swapi.tech/api/people/',{
-					method: "GET"
-				})
+			People = () => {
+				fetch('https://www.swapi.tech/api/people/', ops)
+				
 				.then(resp => {
 					return resp.json();
 				})
 				.then(data => {
-					console.log(data);
+					setStore(data);
 				})
 				.catch(error => {
 					console.log(error);
 				});
-				fetch('https://www.swapi.tech/api/planets/', {
+			}
+
+			Planets = () =>{
+				fetch('https://www.swapi.tech/api/planets/', ops) 
 					method: "GET"
-				})
+					headers: {
+						'Content-Type': 'application/json'
+					  }
+					  {body: JSON.stringify()}
+					}
+				}
 				.then(resp => {
 					return resp.json();
 				})
 				.then(data => {
-					console.log(data);
+					setStore(data.results);
 				})
 				.catch(error => {
 					console.log(error);
 				});
-				fetch('https://www.swapi.tech/api/starships/', {
+			}
+			Starships: () => {
+					fetch('https://www.swapi.tech/api/starships/', {
 					method: "GET"
 				})
 				.then(resp => {
 					return resp.json();
 				})
 				.then(data => {
-					console.log(data);
+					setStore(data.results);
 				})
 				.catch(error => {
 					console.log(error);
