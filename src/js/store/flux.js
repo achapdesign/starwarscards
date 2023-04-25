@@ -1,92 +1,114 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-				
-			]
-			People: []
-			Planets: []
+			People: [],
+			Planets: [],
 			Starships: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			People = () => {
-				fetch('https://www.swapi.tech/api/people/', ops)
-				
-				.then(resp => {
-					return resp.json();
-				})
-				.then(data => {
-					setStore(data);
-				})
-				.catch(error => {
-					console.log(error);
-				});
-			}
-
-			Planets = () =>{
-				fetch('https://www.swapi.tech/api/planets/', ops) 
-					method: "GET"
-					headers: {
-						'Content-Type': 'application/json'
-					  }
-					  {body: JSON.stringify()}
+			getCharacter: () => {
+				for (let i = 1; i <= 10; i++) { fetch("https://www.swapi.tech/api/people") }
+				async function getData() {
+					try {
+						const response = await fetch("https://www.swapi.tech/api/people");
+						const data = await response.json()
+							.then((data) =>
+								setStore({
+									people: [
+										...store.people,
+										{ ...data.result.properties, id: i },
+									],
+								})
+							);
+					} catch (error) {
+						console.error(error);
 					}
 				}
-				.then(resp => {
-					return resp.json();
-				})
-				.then(data => {
-					setStore(data.results);
-				})
-				.catch(error => {
-					console.log(error);
-				});
+
+				getData();
+			},
+			//},
+			getPlanet: () => {
+				for (let i = 1; i <= 10; i++) { fetch("https://www.swapi.tech/api/planets") }
+				async function getData() {
+					try {
+						const response = await fetch("https://www.swapi.tech/api/planets");
+						const data = await response.json()
+							.then((data) =>
+								setStore({
+									planets: [
+										...store.planets,
+										{ ...data.result.properties, id: i },
+									]
+								})
+							);
+					} catch (error) {
+						console.error(error);
+					}
+				}
+
+				getData();
+			},
+			getStarships: () => {
+				for (let i = 1; i <= 10; i++) { fetch("https://www.swapi.tech/api/starships") }
+				async function getData() {
+					try {
+						const response = await fetch("https://www.swapi.tech/api/starships");
+						const data = await response.json()
+							.then((data) =>
+								setStore({
+									planets: [
+										...store.planets,
+										{ ...data.result.properties, id: i },
+									]
+								})
+							);
+					} catch (error) {
+						console.error(error);
+					}
+				}
+
+				getData();
+			},
+
+
+			Planets: () => {
+				//fetch('https://www.swapi.tech/api/planets/', ops) 
+				method: "GET"
+				headers: {
+					'Content-Type'; 'application/json'
+				}
+				{ body: JSON.stringify() }
 			}
+
+			//.then(resp => {
+			//	return resp.json();
+			//})
+			//.then(data => {
+			//	setStore(data.results);
+			//})
+			//.catch(error => {
+			//	console.log(error);
+			//});
+			,
 			Starships: () => {
-					fetch('https://www.swapi.tech/api/starships/', {
+				fetch('https://www.swapi.tech/api/starships/', {
 					method: "GET"
 				})
-				.then(resp => {
-					return resp.json();
-				})
-				.then(data => {
-					setStore(data.results);
-				})
-				.catch(error => {
-					console.log(error);
-				});
+					.then(resp => {
+						return resp.json();
+					})
+					.then(data => {
+						setStore(data.results);
+					})
+					.catch(error => {
+						console.log(error);
+					});
 				/**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
 		}
 	};
 };
