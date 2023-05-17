@@ -7,6 +7,6 @@ import { Navbar } from "../component/navbar";
 export const Home = () => (
 	
 	<>
-		<Navbar />
+		
 	</>
 );
