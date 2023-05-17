@@ -8,7 +8,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 			getCharacter: () => {
-				for (let i = 1; i <= 10; i++) { fetch("https://www.swapi.tech/api/people") }
 				async function getData() {
 					try {
 						const response = await fetch("https://www.swapi.tech/api/people");
@@ -27,10 +26,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				getData();
+				console.log(store.People)
 			},
 			//},
 			getPlanet: () => {
-				for (let i = 1; i <= 10; i++) { fetch("https://www.swapi.tech/api/planets") }
 				async function getData() {
 					try {
 						const response = await fetch("https://www.swapi.tech/api/planets");
@@ -51,7 +50,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getData();
 			},
 			getStarships: () => {
-				for (let i = 1; i <= 10; i++) { fetch("https://www.swapi.tech/api/starships") }
 				async function getData() {
 					try {
 						const response = await fetch("https://www.swapi.tech/api/starships");
